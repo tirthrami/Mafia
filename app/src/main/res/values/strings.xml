@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Mafia</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="ad_home">ca-app-pub-1348715311045774/5287765841</string>
+    <string name="ad_setup">ca-app-pub-1348715311045774/2194698646</string>
+    <string name="ad_select">ca-app-pub-1348715311045774/6485297440</string>
+
+    <string name="intro">"   Mafia is usually an 8+ player game that takes about a half hour. It has no board so it\'s perfect for a large party (especially late at night when people have been drinking) because the players can be all over the room.
+
+
+\nThe basic concept is that members of the dreaded mafia have infiltrated our community and we, as concerned citizens, need to root them out. So every day we hold a town meeting and lynch someone we suspect of being a member of the mafia (it\'s not as bad as it seems: we vote first). Then, every "night" the mafia secretly meet and pick a townsperson to kill; the Villagers learn about it in the morning. There is also an undercover Detective and doctor floating around somewhere who can help the Villagers.
+
+
+\nAt the end of the game when there are only mafia and two Villagers left the remaining Villagers must shake hands. The problem is that they don\'t know who is mafia and who is innocent and the mafia will try to appear as innocent as they can.
+
+\nThe Game ends when either all the mafia have died, or all the Villagers have died."</string>
+
+    <string name="setup">"  Input the number of players playing. Keep in mind 1 person must be omitted because he/she will be the storyteller. He/She will be responsible for guiding the game and presenting a story after each Night.
+
+
+\nAfter inputting the number of players playing, the recommended numbers of the individual roles will show (you can edit those to taste if you like). Tap Begin to start assigning characters. Click on Show and you will get assigned a role (make sure no one else sees what role you have). After you know what your role is, press Next Player and pass the phone to the next person. When everyone has a role, the set up is complete.
+
+
+\nIt\'s important that no one reveal their roles even when they are dead. The one exception to this is the Detective who may reveal who he/she is at any time (however be aware anyone can lie and convince you they are the  Detective ). Dead people are allowed to open their eyes at night but must not participate in the game in any other way (they know who the mafia are and could easily ruin the game)."</string>
+
+    <string name="night">"<b>The Mafia Kills</b>\n
+
+\nThe storyteller will have everyone close their eyes. Then they will have the mafia open their eyes and kill someone. They must note who the mafia is and who the mafia kills. Then they have the mafia close their eyes.
+
+\n\n<b>The Detective Accuses</b>\n
+
+Now they have the Detective open his or her eyes and make an accusation. If the Detective is right, they silently indicate an affirmative otherwise they indicate a negative. There is an odd case in which the Detective is killed before he or she makes an accusation; it doesn\'t matter what you do because they\'re dead and can\'t use the information anyway. Then the Detective closes his or her eyes.
+
+\n\n<b>The Doctor Saves</b>\n
+The storyteller now tells the doctor to wake up. The Doctor(s) can point to 1 person they want to save (including themselves). There is one catch, however, the doctor cannot save themselves twice in a row. The doctor then closes their eyes and it is now day: everyone opens their eyes.
+
+\n\n<b>A Script</b>\n
+
+\"Everyone close your eyes.\" (Check that everyone\'s eyes are closed.)
+\n\"Mafia, open your eyes.\" (Identify the mafia and verify that there are two of them.)
+\n\"Mafia, make your kill.\" (Identify the victim, silently point to him/her and get it confirmed with a nod.) If the two mafia don\'t agree, this is not your problem; just wait until they decide (this can be quite entertaining, watching a silent argument).
+\n\"Mafia, close your eyes.\" (Verify that they have closed their eyes.)
+\n\"Detective , open your eyes.\" (Find the  Detective .)
+\n\"Detective , make your accusation.\" (Verify who the Detective is accusing and then indicate whether he/she is right.)
+\n\"Detective , close your eyes.\" (Verify that he/she has complied.)
+\n\"Doctor, open your eyes\"(Find the doctor.)
+\n\"Doctor, save one person.\"
+\n\"Doctor, close your eyes.\"
+\n\"Everyone open your eyes.\"
+\n\"So-and-so is dead.\" (Create an elaborate story to make gameplay more fun, however remember the real mafia cannot be named in the story)"</string>
+
+    <string name="day">"First, anyone can nominate someone to be lynched. They should give a reason but the reason doesn\'t have to make any sense. For example, "I nominate Tom because mom always liked him better." is a perfectly valid nomination (with a better reason than some I\'ve heard).
+
+
+\nWhen there are two nominations each of the nominees, in the order of their nomination, gets to say why they should not be lynched. Their defense should be one or, if they are longwinded, two sentences -- short and to the point, we haven\'t got all day. \"I\'m innocent!\", \"Dave is the guilty one\", \"I heard John make a noise last night,\" and (my favorite), \"I was mafia last game!\" are all valid defenses. \"I\'m just a terrorist,\" is also legal but probably won\'t save your life. Common decency dictates that everyone should listen respectfully and not make rude comments during the defense statements but I\'ve never seen it happen that way and, in any event, there\'s no way to stop them. But remember that the mafia would really like to manipulate the Villagers into lynching other Villagers so you want to watch for that.
+
+
+\nIn the order of their nomination, the nominees are voted on. For example, someone says \"All in favor of lynching Dave, raise your hand,\" counts the votes and moves on to the next person. Everyone who is still alive should vote for someone; no one may vote twice. In the case of a two way tie, re-vote after another statement from the people on trial. Getting people to agree on someone to lynch is all part of the game. Some people refuse to vote. There is no rule against this but may I suggest that you lynch such people at the earliest opportunity as they are simply not being helpful in the War Against Crime (or the War Against The Occult, as the case may be). Again, participating in the game is what the game is about."</string>
+</resources>

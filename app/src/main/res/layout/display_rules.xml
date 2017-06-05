@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg1"
+    android:id="@+id/displl">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/logo_larger" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/bg1"
+        android:id="@+id/sv">
+
+        <TextView
+            android:id="@+id/rules_TV"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight=".93"
+            android:ellipsize="none"
+            android:maxLines="150"
+            android:scrollHorizontally="false"
+            android:scrollbars="vertical"
+            android:text="New Text"
+            android:padding="10dp"
+            android:textColor="#000000" />
+    </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_select"></com.google.android.gms.ads.AdView>
+</LinearLayout>

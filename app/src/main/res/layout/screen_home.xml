@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg1"
+    android:paddingBottom="10dp"
+    android:id="@+id/bgmain">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:src="@drawable/logo_large"
+        android:layout_weight="1"
+        android:padding="50dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        android:id="@+id/play"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:textColor="#4f0000" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How To"
+        android:id="@+id/howto"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:textSize="30sp" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_home">
+    </com.google.android.gms.ads.AdView>
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/instruct"
+    android:background="@drawable/bg1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:src="@drawable/logo_larger"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_weight="3" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_gravity="center_vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Introduction"
+            android:id="@+id/introduction"
+            android:padding="20dp"
+            android:background="@android:color/transparent"
+            android:textSize="30sp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set-Up"
+            android:id="@+id/setup"
+            android:padding="20dp"
+            android:background="@android:color/transparent"
+            android:textSize="30sp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nights: Secret Deeds"
+            android:id="@+id/night"
+            android:padding="20dp"
+            android:background="@android:color/transparent"
+            android:textSize="30sp"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Days: Lynching"
+            android:id="@+id/days"
+            android:padding="20dp"
+            android:background="@android:color/transparent"
+            android:textSize="30sp"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"></LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_select">
+    </com.google.android.gms.ads.AdView>
+
+</LinearLayout>
