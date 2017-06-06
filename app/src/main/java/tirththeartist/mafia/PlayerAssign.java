@@ -23,16 +23,18 @@ public class PlayerAssign extends AppCompatActivity {
     private int numClicked, numPlayers, numMafia, numDoctor, numDetective, numVillager,
             numMafiaAdded,numDoctorAdded, numDetectiveAdded, numVillagerAdded;
 
+    TextView numCount;
+    Button show, next;
+    ImageView myPlayer;
+    private boolean storyteller;
+    final int[] playerTypes = new int[4];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void init(){
         Typeface myTypeface;
-        final ImageView myPlayer;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String data = extras.getString("PLAYER_COUNT");
@@ -41,6 +43,7 @@ public class PlayerAssign extends AppCompatActivity {
             numDetective = Integer.parseInt(extras.getString("DETECTIVE"));
             numDoctor = Integer.parseInt(extras.getString("DOCTOR"));
             numVillager = Integer.parseInt(extras.getString("VILLAGER"));
+            storyteller = extras.getBoolean("STORYTELLER");
         }
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -54,22 +57,30 @@ public class PlayerAssign extends AppCompatActivity {
         myTypeface = Typeface.createFromAsset(getAssets(), "fonts/script.ttf");
         myPlayer = (ImageView) findViewById(R.id.playerAssignImage);
         myPlayer.setTag(R.drawable.contenthidden);
-        Button show = (Button) findViewById(R.id.show);
-        Button next = (Button) findViewById(R.id.next);
-        final TextView numCount = (TextView) findViewById(R.id.numcount);
+        show = (Button) findViewById(R.id.show);
+        next = (Button) findViewById(R.id.next);
+        numCount = (TextView) findViewById(R.id.numcount);
         numCount.setTypeface(myTypeface);
         show.setTypeface(myTypeface);
         next.setTypeface(myTypeface);
 
         numClicked = 0;
+        playerTypes[0] = R.drawable.mafia;
+        playerTypes[1] = R.drawable.doctor;
+        playerTypes[2] = R.drawable.detective;
+        playerTypes[3] = R.drawable.villager;
+    }
 
-        final int[] playerTypes = {R.drawable.mafia,R.drawable.doctor,R.drawable.detective,R.drawable.villager};
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
         show.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View view) {
+                //TODO: Fix this algorithm to choose player with storyteller
 
                 if(!myPlayer.getTag().equals(R.drawable.contenthidden)){
                     Toast.makeText(PlayerAssign.this, "Press Next Player", Toast.LENGTH_SHORT).show();

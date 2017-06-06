@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,15 +24,19 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText players, mafias, detectives, doctors, villagers;
+    Button begin, textBegin;
+    CheckBox storyteller;
+    TextWatcher tw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void init() {
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1348715311045774/2194698646");
@@ -40,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         Typeface myTypeface;
         TextView myTextView;
-        Button begin = (Button) findViewById(R.id.button);
+        begin = (Button) findViewById(R.id.button);
+        textBegin = (Button) findViewById(R.id.button2);
 
         myTypeface = Typeface.createFromAsset(getAssets(), "fonts/script.ttf");
         myTextView = (TextView) findViewById(R.id.players);
@@ -54,17 +60,46 @@ public class MainActivity extends AppCompatActivity {
         myTextView = (TextView) findViewById(R.id.villagers);
         myTextView.setTypeface(myTypeface);
 
-        final EditText players = (EditText) findViewById(R.id.id_players);
-        final EditText mafias = (EditText) findViewById(R.id.id_mafias);
-        final EditText detectives = (EditText) findViewById(R.id.id_detectives);
-        final EditText doctors = (EditText) findViewById(R.id.id_doctors);
-        final EditText villagers = (EditText) findViewById(R.id.id_villagers);
+        players = (EditText) findViewById(R.id.id_players);
+        mafias = (EditText) findViewById(R.id.id_mafias);
+        detectives = (EditText) findViewById(R.id.id_detectives);
+        doctors = (EditText) findViewById(R.id.id_doctors);
+        villagers = (EditText) findViewById(R.id.id_villagers);
+        storyteller = (CheckBox) findViewById(R.id.id_storyteller);
+
         players.setTypeface(myTypeface);
         mafias.setTypeface(myTypeface);
         detectives.setTypeface(myTypeface);
         doctors.setTypeface(myTypeface);
         villagers.setTypeface(myTypeface);
         begin.setTypeface(myTypeface);
+        textBegin.setTypeface(myTypeface);
+
+        tw = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(storyteller.isChecked())
+                    players.setText("" + getTotalPlayers() + 1);
+                else players.setText("" + getTotalPlayers());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        init();
+
 
         players.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,17 +122,25 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+        mafias.addTextChangedListener(tw);
+        detectives.addTextChangedListener(tw);
+        doctors.addTextChangedListener(tw);
+        villagers.addTextChangedListener(tw);
+
 
         begin.setOnClickListener(new View.OnClickListener() {
             public int getMafia() {
                 return (int) Double.parseDouble(mafias.getText().toString());
             }
+
             public int getDoctor() {
                 return (int) Double.parseDouble(doctors.getText().toString());
             }
+
             public int getDetective() {
                 return (int) Double.parseDouble(detectives.getText().toString());
             }
+
             public int getVillager() {
                 return (int) Double.parseDouble(villagers.getText().toString());
             }
@@ -105,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(players.getText().toString().equals("") || getTotalPlayers() == 0){
+                if (players.getText().toString().equals("") || getTotalPlayers() == 0) {
                     Toast.makeText(MainActivity.this, "How many players?", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -115,19 +158,56 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("DOCTOR", "" + getDoctor());
                     intent.putExtra("DETECTIVE", "" + getDetective());
                     intent.putExtra("VILLAGER", "" + getVillager());
+                    intent.putExtra("STORYTELLER", storyteller.isChecked());
                     startActivity(intent);
                     finish();
                 }
             }
         });
+
+        textBegin.setOnClickListener(new View.OnClickListener() {
+
+            public int getMafia() {
+                return (int) Double.parseDouble(mafias.getText().toString());
+            }
+
+            public int getDoctor() {
+                return (int) Double.parseDouble(doctors.getText().toString());
+            }
+
+            public int getDetective() {
+                return (int) Double.parseDouble(detectives.getText().toString());
+            }
+
+            public int getVillager() {
+                return (int) Double.parseDouble(villagers.getText().toString());
+            }
+
+            @Override
+            public void onClick(View view) {
+                if (players.getText().toString().equals("") || getTotalPlayers() == 0) {
+                    Toast.makeText(MainActivity.this, "How many players?", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    //TODO: Change class to Auto Assign Game Mode
+                    Intent intent = new Intent(getBaseContext(), PlayerAssign.class);
+                    intent.putExtra("PLAYER_COUNT", "" + getTotalPlayers());
+                    intent.putExtra("MAFIA", "" + getMafia());
+                    intent.putExtra("DOCTOR", "" + getDoctor());
+                    intent.putExtra("DETECTIVE", "" + getDetective());
+                    intent.putExtra("VILLAGER", "" + getVillager());
+                    intent.putExtra("STORYTELLER", storyteller.isChecked());
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+
     }
 
+
     private int getTotalPlayers() {
-        final EditText players = (EditText) findViewById(R.id.id_players);
-        final EditText mafias = (EditText) findViewById(R.id.id_mafias);
-        final EditText detectives = (EditText) findViewById(R.id.id_detectives);
-        final EditText doctors = (EditText) findViewById(R.id.id_doctors);
-        final EditText villagers = (EditText) findViewById(R.id.id_villagers);
         int numPlayers = (int) (Double.parseDouble(mafias.getText().toString()) + Double.parseDouble(detectives.getText().toString()) +
                 Double.parseDouble(doctors.getText().toString()) + Double.parseDouble(villagers.getText().toString()));
 
@@ -145,17 +225,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void computeGame() {
-        EditText players = (EditText) findViewById(R.id.id_players);
-        EditText mafias = (EditText) findViewById(R.id.id_mafias);
-        EditText detectives = (EditText) findViewById(R.id.id_detectives);
-        EditText doctors = (EditText) findViewById(R.id.id_doctors);
-        EditText villagers = (EditText) findViewById(R.id.id_villagers);
 
         double numPlayers = Double.parseDouble(players.getText().toString());
         double numMafias;
         double numDoctors;
         double numDetectives;
         double numVillagers;
+
+        if(storyteller.isChecked()) numPlayers -= 1;
 
         numVillagers = Math.ceil(numPlayers / 2);
         int others = (int) (numPlayers - numVillagers);
