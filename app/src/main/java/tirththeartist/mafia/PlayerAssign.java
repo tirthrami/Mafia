@@ -84,7 +84,6 @@ public class PlayerAssign extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                //TODO: Fix this algorithm to choose player with storyteller
 
                 if (!myPlayer.getTag().equals(R.drawable.contenthidden)) {
                     Toast.makeText(PlayerAssign.this, "Press Next Player", Toast.LENGTH_SHORT).show();
