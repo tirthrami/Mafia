@@ -21,19 +21,20 @@ import com.google.android.gms.ads.MobileAds;
  */
 public class PlayerAssign extends AppCompatActivity {
     private int numClicked, numPlayers, numMafia, numDoctor, numDetective, numVillager,
-            numMafiaAdded,numDoctorAdded, numDetectiveAdded, numVillagerAdded;
+            numMafiaAdded, numDoctorAdded, numDetectiveAdded, numVillagerAdded;
 
     TextView numCount;
     Button show, next;
     ImageView myPlayer;
-    private boolean storyteller;
-    final int[] playerTypes = new int[4];
+    private boolean storyteller = false, storytellerAdded = false;
+    final int[] playerTypes = new int[5];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    private void init(){
+    private void init() {
         Typeface myTypeface;
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -69,6 +70,9 @@ public class PlayerAssign extends AppCompatActivity {
         playerTypes[1] = R.drawable.doctor;
         playerTypes[2] = R.drawable.detective;
         playerTypes[3] = R.drawable.villager;
+        playerTypes[4] = R.drawable.storyteller;
+
+        if(storyteller) numPlayers++;
     }
 
     @Override
@@ -82,35 +86,49 @@ public class PlayerAssign extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: Fix this algorithm to choose player with storyteller
 
-                if(!myPlayer.getTag().equals(R.drawable.contenthidden)){
+                if (!myPlayer.getTag().equals(R.drawable.contenthidden)) {
                     Toast.makeText(PlayerAssign.this, "Press Next Player", Toast.LENGTH_SHORT).show();
-                } else if(numClicked <= numPlayers){
+                } else if (numClicked < numPlayers) {
                     numClicked++;
                     Log.d("numClicked", "" + numClicked);
-                    if((numClicked<=numPlayers))numCount.setText("" + numClicked);
-                    int rand = (int) (Math.random()*100);
-                    Log.d("rand",""+rand);
-                    if(rand<25 && numMafia != numMafiaAdded){
-                        myPlayer.setImageResource(playerTypes[0]);
-                        myPlayer.setTag(playerTypes[0]);
-                        numMafiaAdded++;
-                        Toast.makeText(PlayerAssign.this, "Press Next Player before passing the phone.", Toast.LENGTH_SHORT).show();
-                    }else if (rand<50 && numDoctor != numDoctorAdded){
-                        myPlayer.setImageResource(playerTypes[1]);
-                        myPlayer.setTag(playerTypes[1]);
-                        numDoctorAdded++;
-                        Toast.makeText(PlayerAssign.this, "Press Next Player before passing the phone.", Toast.LENGTH_SHORT).show();
-                    } else if (rand<75 && numDetective !=numDetectiveAdded){
-                        myPlayer.setImageResource(playerTypes[2]);
-                        myPlayer.setTag(playerTypes[2]);
-                        numDetectiveAdded++;
-                        Toast.makeText(PlayerAssign.this, "Press Next Player before passing the phone.", Toast.LENGTH_SHORT).show();
-                    }else if (rand<100 && numVillager != numVillagerAdded){
-                        myPlayer.setImageResource(playerTypes[3]);
-                        myPlayer.setTag(playerTypes[3]);
-                        numVillagerAdded++;
-                        Toast.makeText(PlayerAssign.this, "Press Next Player before passing the phone.", Toast.LENGTH_SHORT).show();
+                    if ((numClicked <= numPlayers)) numCount.setText("" + numClicked);
+
+
+                    while (true) {
+                        int randNum;
+                        if (storyteller) randNum = (int) (Math.random() * 5);
+                        else randNum = (int) (Math.random() * 4);
+                        Log.d("randomNum", "" + randNum);
+                        if (randNum == 0 && numMafia != numMafiaAdded) {
+                            myPlayer.setImageResource(playerTypes[0]);
+                            myPlayer.setTag(playerTypes[0]);
+                            numMafiaAdded++;
+                            break;
+                        } else if (randNum == 1 && numDoctor != numDoctorAdded) {
+                            myPlayer.setImageResource(playerTypes[1]);
+                            myPlayer.setTag(playerTypes[1]);
+                            numDoctorAdded++;
+                            break;
+                        } else if (randNum == 2 && numDetective != numDetectiveAdded) {
+                            myPlayer.setImageResource(playerTypes[2]);
+                            myPlayer.setTag(playerTypes[2]);
+                            numDetectiveAdded++;
+                            break;
+                        } else if (randNum == 3 && numVillager != numVillagerAdded) {
+                            myPlayer.setImageResource(playerTypes[3]);
+                            myPlayer.setTag(playerTypes[3]);
+                            numVillagerAdded++;
+                            break;
+                        } else if (randNum == 4 && !storytellerAdded) {
+                            myPlayer.setImageResource(playerTypes[4]);
+                            myPlayer.setTag(playerTypes[4]);
+                            storytellerAdded = true;
+                            break;
+                        }
+
                     }
+
+
                 } else {
                     myPlayer.setImageResource(R.drawable.setupcomplete);
                     myPlayer.setTag(R.drawable.setupcomplete);
@@ -121,11 +139,10 @@ public class PlayerAssign extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(numClicked <= numPlayers){
+                if (numClicked <= numPlayers) {
                     myPlayer.setImageResource(R.drawable.contenthidden);
                     myPlayer.setTag(R.drawable.contenthidden);
-                }
-                else myPlayer.setImageResource(R.drawable.setupcomplete);
+                } else myPlayer.setImageResource(R.drawable.setupcomplete);
             }
         });
     }

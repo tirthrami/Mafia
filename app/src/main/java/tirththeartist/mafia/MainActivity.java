@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,12 +26,15 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import static java.lang.Double.*;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText players, mafias, detectives, doctors, villagers;
-    Button begin, textBegin;
+    Button begin, textBegin, computeGame;
     CheckBox storyteller;
     TextWatcher tw;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         TextView myTextView;
         begin = (Button) findViewById(R.id.button);
         textBegin = (Button) findViewById(R.id.button2);
+        computeGame = (Button) findViewById(R.id.computeGame);
 
         myTypeface = Typeface.createFromAsset(getAssets(), "fonts/script.ttf");
         myTextView = (TextView) findViewById(R.id.players);
@@ -58,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         myTextView = (TextView) findViewById(R.id.mafias);
         myTextView.setTypeface(myTypeface);
         myTextView = (TextView) findViewById(R.id.villagers);
+        myTextView.setTypeface(myTypeface);
+        myTextView = (TextView) findViewById(R.id.storyteller);
         myTextView.setTypeface(myTypeface);
 
         players = (EditText) findViewById(R.id.id_players);
@@ -74,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         villagers.setTypeface(myTypeface);
         begin.setTypeface(myTypeface);
         textBegin.setTypeface(myTypeface);
+        computeGame.setTypeface(myTypeface);
 
         tw = new TextWatcher() {
             @Override
@@ -83,16 +93,23 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(storyteller.isChecked())
-                    players.setText("" + getTotalPlayers() + 1);
-                else players.setText("" + getTotalPlayers());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if (storyteller.isChecked())
+                    players.setText("" + getTotalPlayers() + 1);
+                else players.setText("" + getTotalPlayers());
             }
         };
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        init();
+        players.setText("0");
+        computeGame();
     }
 
     @Override
@@ -101,13 +118,18 @@ public class MainActivity extends AppCompatActivity {
         init();
 
 
-        players.addTextChangedListener(new TextWatcher() {
+        /*players.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
                 if (!players.getText().toString().matches("")) {
                     computeGame();
                 } else {
@@ -117,32 +139,37 @@ public class MainActivity extends AppCompatActivity {
                     villagers.setText("");
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
         });
         mafias.addTextChangedListener(tw);
         detectives.addTextChangedListener(tw);
         doctors.addTextChangedListener(tw);
-        villagers.addTextChangedListener(tw);
+        villagers.addTextChangedListener(tw); */
+
+        computeGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!players.getText().toString().matches(""))
+                    computeGame();
+                else Toast.makeText(getApplicationContext(),"Enter Number of Players First", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         begin.setOnClickListener(new View.OnClickListener() {
             public int getMafia() {
-                return (int) Double.parseDouble(mafias.getText().toString());
+                return (int) parseDouble(mafias.getText().toString());
             }
 
             public int getDoctor() {
-                return (int) Double.parseDouble(doctors.getText().toString());
+                return (int) parseDouble(doctors.getText().toString());
             }
 
             public int getDetective() {
-                return (int) Double.parseDouble(detectives.getText().toString());
+                return (int) parseDouble(detectives.getText().toString());
             }
 
             public int getVillager() {
-                return (int) Double.parseDouble(villagers.getText().toString());
+                return (int) parseDouble(villagers.getText().toString());
             }
 
             @Override
@@ -168,19 +195,19 @@ public class MainActivity extends AppCompatActivity {
         textBegin.setOnClickListener(new View.OnClickListener() {
 
             public int getMafia() {
-                return (int) Double.parseDouble(mafias.getText().toString());
+                return (int) parseDouble(mafias.getText().toString());
             }
 
             public int getDoctor() {
-                return (int) Double.parseDouble(doctors.getText().toString());
+                return (int) parseDouble(doctors.getText().toString());
             }
 
             public int getDetective() {
-                return (int) Double.parseDouble(detectives.getText().toString());
+                return (int) parseDouble(detectives.getText().toString());
             }
 
             public int getVillager() {
-                return (int) Double.parseDouble(villagers.getText().toString());
+                return (int) parseDouble(villagers.getText().toString());
             }
 
             @Override
@@ -208,8 +235,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private int getTotalPlayers() {
-        int numPlayers = (int) (Double.parseDouble(mafias.getText().toString()) + Double.parseDouble(detectives.getText().toString()) +
-                Double.parseDouble(doctors.getText().toString()) + Double.parseDouble(villagers.getText().toString()));
+        int numPlayers;
+        numPlayers = (int) (parseDouble(mafias.getText().toString()) + parseDouble(detectives.getText().toString()) +
+                parseDouble(doctors.getText().toString()) + parseDouble(villagers.getText().toString()));
 
         return numPlayers;
     }
@@ -226,13 +254,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void computeGame() {
 
-        double numPlayers = Double.parseDouble(players.getText().toString());
+        double numPlayers = parseDouble(players.getText().toString());
         double numMafias;
         double numDoctors;
         double numDetectives;
         double numVillagers;
 
-        if(storyteller.isChecked()) numPlayers -= 1;
+        if (storyteller.isChecked()) numPlayers -= 1;
 
         numVillagers = Math.ceil(numPlayers / 2);
         int others = (int) (numPlayers - numVillagers);
