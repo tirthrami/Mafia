@@ -174,7 +174,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
+                if(mafias.getText().toString().matches("") || mafias.getText().equals(null)){
+                    Toast.makeText(MainActivity.this, "Press Compute Game", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (players.getText().toString().equals("") || getTotalPlayers() == 0) {
                     Toast.makeText(MainActivity.this, "How many players?", Toast.LENGTH_SHORT).show();
                 } else {
@@ -212,8 +215,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (players.getText().toString().equals("") || getTotalPlayers() == 0) {
-                    Toast.makeText(MainActivity.this, "How many players?", Toast.LENGTH_SHORT).show();
+                if(mafias.getText().toString().matches("") || mafias.getText().equals(null) ){
+                    Toast.makeText(MainActivity.this, "Press Compute Game", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (players.getText().toString().equals("") || getTotalPlayers() == 0 || (int)(Double.parseDouble(mafias.getText().toString())) == 0) {
+                    Toast.makeText(MainActivity.this, "Not a valid number of players", Toast.LENGTH_SHORT).show();
                 } else {
 
                     //TODO: Change class to Auto Assign Game Mode

@@ -226,6 +226,7 @@
             android:textColor="#4f0000"
             android:layout_weight="1"/>
 
+    <!-- TODO: Add Text Message Role Assignment Functionality -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -236,7 +237,8 @@
         android:textSize="25sp"
         android:textAllCaps="false"
         android:textColor="#4f0000"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:visibility="gone"/>
 
 </LinearLayout>
 
