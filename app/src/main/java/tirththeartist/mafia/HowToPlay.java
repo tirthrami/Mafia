@@ -16,6 +16,9 @@ import com.google.android.gms.ads.AdView;
  * Created by tirthrami on 8/23/16.
  */
 public class HowToPlay extends AppCompatActivity {
+    Button intro,set,night,day;
+    Typeface myTypeface;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,24 +28,10 @@ public class HowToPlay extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.play_howto);
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/script.ttf");
-        Button intro,set,night,day;
 
-        intro = (Button) findViewById(R.id.introduction);
-        set = (Button) findViewById(R.id.setup);
-        night = (Button) findViewById(R.id.night);
-        day = (Button) findViewById(R.id.days);
+        init();
 
-        intro.setTypeface(myTypeface);
-        set.setTypeface(myTypeface);
-        night.setTypeface(myTypeface);
-        day.setTypeface(myTypeface);
-
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //Send RulesDisplay appropriate data depending on button pressed
 
         intro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +71,32 @@ public class HowToPlay extends AppCompatActivity {
 
     }
 
+    private void init() {
+        //Fullscreen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.play_howto);
+        //Custom font
+        myTypeface = Typeface.createFromAsset(getAssets(), "fonts/script.ttf");
+
+        intro = (Button) findViewById(R.id.introduction);
+        set = (Button) findViewById(R.id.setup);
+        night = (Button) findViewById(R.id.night);
+        day = (Button) findViewById(R.id.days);
+
+        intro.setTypeface(myTypeface);
+        set.setTypeface(myTypeface);
+        night.setTypeface(myTypeface);
+        day.setTypeface(myTypeface);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
+        //Free resources
         LinearLayout layout = (LinearLayout) findViewById(R.id.instruct);
         layout.setBackgroundDrawable(null);
         setContentView(new View(this));

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Mafia</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="ad_home">ca-app-pub-1348715311045774/5287765841</string>
     <string name="ad_setup">ca-app-pub-1348715311045774/2194698646</string>

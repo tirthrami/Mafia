@@ -29,9 +29,12 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //Full Screen App
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.screen_home);
+        //Load Banner Ads
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1348715311045774/5287765841");
+
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/script.ttf");
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -40,10 +43,11 @@ public class HomeScreen extends AppCompatActivity {
 
         Button play = (Button) findViewById(R.id.play);
         final Button howTo = (Button) findViewById(R.id.howto);
+
         howTo.setTypeface(myTypeface);
         play.setTypeface(myTypeface);
 
-
+        //Show set up Activity when clicked
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +58,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        //Show Rules Activity when clicked
         howTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +74,7 @@ public class HomeScreen extends AppCompatActivity {
         super.onStop();
         ImageView imageView = (ImageView) findViewById(R.id.logo);
         LinearLayout layout = (LinearLayout) findViewById(R.id.bgmain);
+        //Save memory by freeing resources
         layout.setBackgroundDrawable(null);
         imageView.setImageDrawable(null);
         imageView.setBackgroundDrawable(null);

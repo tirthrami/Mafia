@@ -25,9 +25,11 @@ public class RulesDisplay extends AppCompatActivity {
         super.onStart();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.display_rules);
-        String data = null;
-        TextView textView = (TextView) findViewById(R.id.rules_TV);
 
+        TextView textView = (TextView) findViewById(R.id.rules_TV);
+        String data = null;
+
+        //Get data from previous screen and see which button was pressed
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             data = extras.getString("SECTION");

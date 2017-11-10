@@ -34,6 +34,9 @@ public class PlayerAssign extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Initial Setup of the Activity, such as storing data from previous activity, and instantiating objects
+     */
     private void init() {
         Typeface myTypeface;
         Bundle extras = getIntent().getExtras();
@@ -72,6 +75,7 @@ public class PlayerAssign extends AppCompatActivity {
         playerTypes[3] = R.drawable.villager;
         playerTypes[4] = R.drawable.storyteller;
 
+        //add 1 to numPlayers of storyteller is to be randomized
         if(storyteller) numPlayers++;
     }
 
@@ -92,32 +96,37 @@ public class PlayerAssign extends AppCompatActivity {
                     Log.d("numClicked", "" + numClicked);
                     if ((numClicked <= numPlayers)) numCount.setText("" + numClicked);
 
-
+                    //TODO: use ArrayList and randomly choose from that instead of this algorithm
                     while (true) {
                         int randNum;
                         if (storyteller) randNum = (int) (Math.random() * 5);
                         else randNum = (int) (Math.random() * 4);
                         Log.d("randomNum", "" + randNum);
+
                         if (randNum == 0 && numMafia != numMafiaAdded) {
                             myPlayer.setImageResource(playerTypes[0]);
                             myPlayer.setTag(playerTypes[0]);
                             numMafiaAdded++;
                             break;
+
                         } else if (randNum == 1 && numDoctor != numDoctorAdded) {
                             myPlayer.setImageResource(playerTypes[1]);
                             myPlayer.setTag(playerTypes[1]);
                             numDoctorAdded++;
                             break;
+
                         } else if (randNum == 2 && numDetective != numDetectiveAdded) {
                             myPlayer.setImageResource(playerTypes[2]);
                             myPlayer.setTag(playerTypes[2]);
                             numDetectiveAdded++;
                             break;
+
                         } else if (randNum == 3 && numVillager != numVillagerAdded) {
                             myPlayer.setImageResource(playerTypes[3]);
                             myPlayer.setTag(playerTypes[3]);
                             numVillagerAdded++;
                             break;
+
                         } else if (randNum == 4 && !storytellerAdded) {
                             myPlayer.setImageResource(playerTypes[4]);
                             myPlayer.setTag(playerTypes[4]);
